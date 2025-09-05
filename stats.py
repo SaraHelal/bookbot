@@ -1,36 +1,26 @@
 def get_num_words(text):
-    return len(text.split())
+    words = text.split()
+    return len(words)
 
-def get_chars_from_word(text):
-    count_chars_dic = {}
-    for char in text.lower():
-        if char in count_chars_dic:
-            count_chars_dic[char] += 1
+
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
         else:
-            count_chars_dic[char] = 1
-    refactor_dict(count_chars_dic)
-    return count_chars_dic
+            chars[lowered] = 1
+    return chars
 
-def refactor_dict(chars_dict):
-    res_arr = []
-    for key, value in chars_dict.items():
-        new_dict = {}
-        new_dict["char"] = key
-        new_dict["num"] = value
-        res_arr.append(new_dict)
-    sorted_arr = sort_dict(res_arr)
-    print_output(sorted_arr)
-    return sorted_arr
 
-    return
-def sort_on(items):
-    return items["num"]
+def sort_on(d):
+    return d["num"]
 
-def sort_dict(chars_dict):
-    chars_dict.sort(reverse=True, key=sort_on)
-    return chars_dict
 
-def print_output(sorted_arr):
-    for obj in sorted_arr:
-        if obj['char'].isalpha():
-            print(f"{obj['char']}: {obj['num']}")
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
